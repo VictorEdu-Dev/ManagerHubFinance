@@ -1,6 +1,7 @@
-package org.vedu.managerhubfinance.persistence.model.persongroup;
+package org.vedu.managerhubfinance.persistence.model.groupperson;
 
-import org.vedu.managerhubfinance.persistence.model.PersonAccount;
+import java.util.List;
+
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 import org.vedu.managerhubfinance.persistence.model.listeners.PersonListener;
 
@@ -8,9 +9,15 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,12 +25,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Data
+@ToString(exclude = {
+		"personContact",
+		"personPhone", 
+		"personAddress", 
+		"customer", 
+		"supplier", 
+		"carrier", 
+		"accountant"})
 @Builder
 @EntityListeners({PersonListener.class})
 @Table(name = "person")
@@ -31,44 +47,43 @@ import lombok.NoArgsConstructor;
 public class Person extends PropertiesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     
     @Basic
     @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Basic
-    @Column(name = "type", nullable = false, length = 1)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, length = 10)
+    private PersonType type;
+
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    private List<PersonContact> personContact;
+    
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    private List<PersonPhone> personPhone;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_address_id", nullable = false)
+    private PersonAddress personAddress;
 
     @Basic
-    @Column(name = "email", nullable = false, length = 50)
-    private String email;
-
-    @Basic
-    @Column(name = "site", nullable = false, length = 50)
+    @Column(name = "site", nullable = false, length = 100)
     private String site;
 
-    @Basic
-    @Column(name = "customer", nullable = false, length = 1)
-    private String customer;
+    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    private Customer customer;
 
-    @Basic 
-    @Column(name = "supplier", nullable = false, length = 1)
-    private String supplier;
+    @OneToOne(mappedBy = "supplier", fetch = FetchType.LAZY)
+    private Supplier supplier;
 
-    @Basic 
-    @Column(name = "carrier", nullable = false, length = 1)
-    private String carrier;
+    @OneToOne(mappedBy = "carrier", fetch = FetchType.LAZY)
+    private Carrier carrier;
 
     @Basic
     @Column(name = "employee", nullable = false, length = 1)
     private String employee;
 
-    @Basic
-    @Column(name = "accountant", nullable = false, length = 1)
-    private String accountant;
-    
-    @OneToOne(mappedBy = "person")
-    private PersonAccount account;
+    @OneToOne(mappedBy = "accountant", fetch = FetchType.LAZY)
+    private Accountant accountant;
 }

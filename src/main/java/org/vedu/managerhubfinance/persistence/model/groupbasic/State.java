@@ -1,15 +1,14 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
+package org.vedu.managerhubfinance.persistence.model.groupbasic;
 
 import java.util.List;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -22,25 +21,25 @@ import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "personNatural")
+@NoArgsConstructor
+@ToString(exclude = {"cities"})
 @Builder
-@Table(name = "education_level")
+@Table(name = "state")
 @Entity
-public class EducationLevel extends PropertiesEntity {
+public class State extends PropertiesEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@OneToMany(mappedBy = "educationLevel", fetch = FetchType.LAZY)
-	private List<PersonNatural> personNatural;
+	@Column(name = "ibge_code", nullable = false, unique = true)
+	private Integer ibgeCode;
 	
 	@Basic
-	@Column(name = "name", nullable = false, length = 100)
+	@Column(name = "acronym", length = 2, nullable = false, unique = true)
+	private String acronym;
+	
+	@Basic
+	@Column(name = "name", length = 50, nullable = false, unique = true)
 	private String name;
 	
-	@Basic
-	@Column(name = "description", nullable = false, length = 100)
-	private String description;
+	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<City> cities;
 }

@@ -1,4 +1,4 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
+package org.vedu.managerhubfinance.persistence.model.groupcollaborator;
 
 import java.time.LocalDateTime;
 
@@ -22,26 +22,38 @@ import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
+@NoArgsConstructor
+@ToString(exclude = { "roles", "collaborator"})
 @Builder
-@Table(name = "carrier")
+@Table(name = "users")
 @Entity
-public class Carrier extends PropertiesEntity {
+public class Users extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@OneToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	private Person person;
+	@JoinColumn(name = "collaborator_id", nullable = false)
+	private Collaborator collaborator;
+	
+	@OneToOne
+	@JoinColumn(name = "roles_id", nullable = false)
+	private Roles roles;
 	
 	@Basic
-	@Column(name = "register_date", nullable = false)
-	private LocalDateTime registerDate;
+	@Column(name = "username", nullable = false, unique = true, length = 100)
+	private String username;
 	
 	@Basic
-	@Column(name = "observation", nullable = true, length = 100)
-	private String observation;
+	@Column(name = "password", nullable = false, length = 100)
+	private String password;
+	
+	@Basic
+	@Column(name = "admin", nullable = false, length = 1)
+	private String admin;
+	
+	@Basic
+	@Column(name = "active", nullable = false)
+	private LocalDateTime registrationDate;
 }

@@ -1,6 +1,4 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
-
-import java.time.LocalDateTime;
+package org.vedu.managerhubfinance.persistence.model.groupbasic;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 
@@ -10,38 +8,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
+@NoArgsConstructor
 @Builder
-@Table(name = "carrier")
+@Table(name = "installment_day")
 @Entity
-public class Carrier extends PropertiesEntity {
+public class InstallmentDay extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	private Person person;
-	
 	@Basic
-	@Column(name = "register_date", nullable = false)
-	private LocalDateTime registerDate;
-	
-	@Basic
-	@Column(name = "observation", nullable = true, length = 100)
-	private String observation;
+	@Column(name = "day", nullable = false, length = 2)
+	private String day;
 }

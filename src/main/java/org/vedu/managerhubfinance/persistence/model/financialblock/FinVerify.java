@@ -1,4 +1,6 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
+package org.vedu.managerhubfinance.persistence.model.financialblock;
+
+import java.time.LocalDateTime;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 
@@ -9,7 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,32 +21,31 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
-@Builder
-@Table(name = "person_contact")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = { "checkbook" })
+@Table(name = "fin_verify")
 @Entity
-public class PersonContact extends PropertiesEntity {
+public class FinVerify extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	private Person person;
+	@JoinColumn(name = "checkbook_id", nullable = false, unique = true)
+	private FinCheckbook checkbook;
 	
 	@Basic
-	@Column(name = "name", nullable = false, length = 150)
-	private String name;
+	@Column(name = "number", nullable = true)
+	private Integer number;
 	
 	@Basic
-	@Column(name = "email", length = 150)
-	private String email;
+	@Column(name = "status_check", nullable = true, length = 1)
+	private String statusCheck;
 	
-	@Lob
-	@Column(name = "obsevation", length = 100)
-	private String observation;
-
+	@Basic
+	@Column(name = "status_date", nullable = true)
+	private LocalDateTime statusDate;
 }

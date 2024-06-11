@@ -1,46 +1,55 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
-
-import java.util.List;
+package org.vedu.managerhubfinance.persistence.model.groupbasic;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "personNatural")
+@NoArgsConstructor
 @Builder
-@Table(name = "education_level")
+@Table(name = "code_situation")
 @Entity
-public class EducationLevel extends PropertiesEntity {
+public class CodeSituation extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(mappedBy = "educationLevel", fetch = FetchType.LAZY)
-	private List<PersonNatural> personNatural;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type", nullable = false)
+	private CodeSituationEnum type;
 	
 	@Basic
-	@Column(name = "name", nullable = false, length = 100)
-	private String name;
+	@Column(name = "code", nullable = false, length = 10)
+	private String code;
 	
 	@Basic
 	@Column(name = "description", nullable = false, length = 100)
 	private String description;
+	
+	@Basic
+	@Column(name = "obs", nullable = true, length = 100)
+	private String obs;
+	
+	@Basic
+	@Column(name = "aplicability", nullable = true, length = 100)
+	private String aplicability;
+	
+	@Basic
+	@Column(name = "denomination", nullable = true, length = 100)
+	private String denomination;
 }

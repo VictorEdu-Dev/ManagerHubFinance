@@ -1,22 +1,15 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
-
-import java.util.List;
+package org.vedu.managerhubfinance.persistence.model.groupcompany;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
-import org.vedu.managerhubfinance.persistence.model.groupbasic.Cep;
-import org.vedu.managerhubfinance.persistence.model.groupbasic.City;
-import org.vedu.managerhubfinance.persistence.model.groupbasic.State;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,26 +20,27 @@ import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
+@NoArgsConstructor
+@ToString(exclude = {"company"})
 @Builder
-@Table(name = "person_address")
+@Table(name = "company_address")
 @Entity
-public class PersonAddress extends PropertiesEntity {
+public class CompanyAddress extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
-	@OneToMany(mappedBy = "personAddress", fetch = FetchType.LAZY)
-	private List<Person> person;
-	
-	@Basic
-	@Column(name = "public_place", nullable = false, length = 150)
-	private String publicPlace;
+	@ManyToOne
+	@JoinColumn(name = "company_id", nullable = false)
+	private Company company;
 	
 	@Basic
-	@Column(name = "number", length = 10)
+	@Column(name = "street", nullable = false, length = 50)
+	private String street;
+	
+	@Basic
+	@Column(name = "number", nullable = false, length = 10)
 	private String number;
 	
 	@Basic
@@ -54,20 +48,28 @@ public class PersonAddress extends PropertiesEntity {
 	private String complement;
 	
 	@Basic
-	@Column(name = "neighborhood", length = 100)
+	@Column(name = "neighborhood", nullable = false, length = 50)
 	private String neighborhood;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "city_ibge_code")
-	private City city;
+	@Basic
+	@Column(name = "city", nullable = false, length = 50)
+	private String city;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "state_ibge_code")
-	private State state;
+	@Basic
+	@Column(name = "state", nullable = false, length = 50)
+	private String state;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "number_cep_cep", nullable = false)
-	private Cep numberCep;
+	@Basic
+	@Column(name = "cep", nullable = false, length = 10)
+	private String cep;
+	
+	@Basic
+	@Column(name = "igbe_city_code", nullable = false, length = 10)
+	private String igbeCityCode;
+	
+	@Basic
+	@Column(name = "igbe_state_code", nullable = false, length = 10)
+	private String ibgeStateCode;
 	
 	@Basic
 	@Column(name = "principal", nullable = false, length = 1)

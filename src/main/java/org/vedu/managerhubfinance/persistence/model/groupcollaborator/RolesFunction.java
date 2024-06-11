@@ -1,4 +1,4 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
+package org.vedu.managerhubfinance.persistence.model.groupcollaborator;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 
@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,31 +20,38 @@ import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
+@NoArgsConstructor
+@ToString(exclude = { "roles", "function"})
 @Builder
-@Table(name = "person_contact")
+@Table(name = "roles_function")
 @Entity
-public class PersonContact extends PropertiesEntity {
+public class RolesFunction extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	private Person person;
+	@JoinColumn(name = "roles_id")
+	private Roles roles;
+	
+	@ManyToOne
+	@JoinColumn(name = "function_id")
+	private Function function;
 	
 	@Basic
-	@Column(name = "name", nullable = false, length = 150)
-	private String name;
+	@Column(name = "active", nullable = false)
+	private Boolean active;
 	
 	@Basic
-	@Column(name = "email", length = 150)
-	private String email;
+	@Column(name = "can_create", nullable = false)
+	private Boolean canCreate;
 	
-	@Lob
-	@Column(name = "obsevation", length = 100)
-	private String observation;
-
+	@Basic
+	@Column(name = "can_read", nullable = false)
+	private Boolean canAlter;
+	
+	@Basic
+	@Column(name = "can_update", nullable = false)
+	private Boolean canDelete;
 }

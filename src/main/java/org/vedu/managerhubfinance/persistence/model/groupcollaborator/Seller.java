@@ -1,4 +1,6 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
+package org.vedu.managerhubfinance.persistence.model.groupcollaborator;
+
+import java.math.BigDecimal;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 
@@ -9,8 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,31 +22,26 @@ import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
+@NoArgsConstructor
+@ToString(exclude = {"collaborator"})
 @Builder
-@Table(name = "person_contact")
+@Table(name = "seller")
 @Entity
-public class PersonContact extends PropertiesEntity {
+public class Seller extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	private Person person;
+	@OneToOne
+	@JoinColumn(name = "collaborator_id", nullable = false)
+	private Collaborator collaborator;
 	
 	@Basic
-	@Column(name = "name", nullable = false, length = 150)
-	private String name;
+	@Column(name = "comission", nullable = true)
+	private BigDecimal comission;
 	
 	@Basic
-	@Column(name = "email", length = 150)
-	private String email;
-	
-	@Lob
-	@Column(name = "obsevation", length = 100)
-	private String observation;
-
+	@Column(name = "sales_target", nullable = true)
+	private BigDecimal salesTarget;
 }

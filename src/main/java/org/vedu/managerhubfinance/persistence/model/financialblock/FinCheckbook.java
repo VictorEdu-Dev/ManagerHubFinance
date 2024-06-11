@@ -1,6 +1,7 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
+package org.vedu.managerhubfinance.persistence.model.financialblock;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
+import org.vedu.managerhubfinance.persistence.model.groupfinance.AccountTeller;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -9,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,32 +20,31 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
-@Builder
-@Table(name = "person_contact")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = { "accountTeller" })
+@Table(name = "fin_checkbook")
 @Entity
-public class PersonContact extends PropertiesEntity {
+public class FinCheckbook extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	private Person person;
+	@JoinColumn(name = "account_teller_id", nullable = false)
+	private AccountTeller accountTeller;
 	
 	@Basic
-	@Column(name = "name", nullable = false, length = 150)
-	private String name;
+	@Column(name = "checkbook", nullable = false, length = 10)
+	private String checkbook;
 	
 	@Basic
-	@Column(name = "email", length = 150)
-	private String email;
+	@Column(name = "number", nullable = false)
+	private Integer number;
 	
-	@Lob
-	@Column(name = "obsevation", length = 100)
-	private String observation;
-
+	@Basic
+	@Column(name = "status_check", nullable = false, length = 1)
+	private String statusCheck;
 }

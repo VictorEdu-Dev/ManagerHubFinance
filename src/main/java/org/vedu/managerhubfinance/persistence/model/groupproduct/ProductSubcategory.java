@@ -1,10 +1,11 @@
-package org.vedu.managerhubfinance.persistence.model.groupperson;
+package org.vedu.managerhubfinance.persistence.model.groupproduct;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,31 +22,26 @@ import lombok.ToString;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
+@NoArgsConstructor
+@ToString(exclude = "productCategory")
 @Builder
-@Table(name = "person_contact")
+@Table(name = "product_subcategory")
 @Entity
-public class PersonContact extends PropertiesEntity {
+public class ProductSubcategory extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	private Person person;
-	
 	@Basic
-	@Column(name = "name", nullable = false, length = 150)
+	@Column(name = "name", nullable = false, length = 100)
 	private String name;
 	
-	@Basic
-	@Column(name = "email", length = 150)
-	private String email;
-	
 	@Lob
-	@Column(name = "obsevation", length = 100)
-	private String observation;
-
+	@Column(name = "description", nullable = true, length = 100)
+	private String description;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_category_id", nullable = true)
+	private ProductCategory productCategory;
 }
