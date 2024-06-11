@@ -18,8 +18,30 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.5.0.Final</version>
+            <version>6.5.2.Final</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+		    <groupId>jakarta.ws.rs</groupId>
+		    <artifactId>jakarta.ws.rs-api</artifactId>
+		    <version>4.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/jakarta.inject/jakarta.inject-api -->
+		<dependency>
+		    <groupId>jakarta.inject</groupId>
+		    <artifactId>jakarta.inject-api</artifactId>
+		    <version>2.0.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/jakarta.ejb/jakarta.ejb-api -->
+		<dependency>
+		    <groupId>jakarta.ejb</groupId>
+		    <artifactId>jakarta.ejb-api</artifactId>
+		    <version>4.0.1</version>
+		</dependency>
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -46,6 +68,13 @@
             <version>6.1.0-M2</version>
             <scope>provided</scope>
         </dependency>
+        
+		<dependency>
+		    <groupId>com.opencsv</groupId>
+		    <artifactId>opencsv</artifactId>
+		    <version>5.9</version>
+		</dependency>
+
     </dependencies>
     
     <build>
