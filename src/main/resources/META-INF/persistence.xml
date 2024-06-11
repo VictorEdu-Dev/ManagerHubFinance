@@ -7,7 +7,7 @@
 
     <persistence-unit name="manager_hub" transaction-type="JTA">
     	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    	<jta-data-source>java:/jdbc/PostgresDS</jta-data-source>
+     	<jta-data-source>java:/jdbc/PostgresDS</jta-data-source>
     	
         <properties>
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
