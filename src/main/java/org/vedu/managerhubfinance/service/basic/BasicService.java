@@ -1,27 +1,26 @@
 package org.vedu.managerhubfinance.service.basic;
 
+import java.util.Map;
+import java.util.Optional;
+
 import org.vedu.managerhubfinance.persistence.model.groupbasic.Cep;
-import org.vedu.managerhubfinance.persistence.repository.base.impl.CepDAOImpl;
 
-import jakarta.persistence.EntityManager;
-import lombok.Data;
+import jakarta.ejb.Local;
 
-@Data
-public class BasicService {
-	private CepDAOImpl  cepDAO;
+@Local
+public interface BasicService {
+	public void initialize();
 	
-	public BasicService(EntityManager em) {
-		this.cepDAO = new CepDAOImpl();
-		this.cepDAO.setEm(em);
-	}
+	public Optional<String> getNumberCep(Map<String, String> properties);
 	
-	public Cep getCep(String cep) {
-		try {
-			return cepDAO.findSingleEntity(cep).get();
-		} catch (Exception e) {
-			System.out.println("CEP não encontrado");
-			return null;
-		}
-        
-	}
+	public Optional<Integer> getStateCode(String stateName);
+	
+	public Optional<String> getCityName(String cep);
+	
+	public Optional<Map<String, String>> getAddressInfo(String cepNumber);
+	
+	public void editCepInfo(Cep cep);
+	
+	public void destruct();
+	
 }
