@@ -71,19 +71,19 @@ public class Person extends PropertiesEntity {
     @Column(name = "site", nullable = false, length = 100)
     private String site;
 
-    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     private Customer customer;
 
-    @OneToOne(mappedBy = "supplier", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     private Supplier supplier;
 
-    @OneToOne(mappedBy = "carrier", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     private Carrier carrier;
 
     @Basic
     @Column(name = "employee", nullable = false, length = 1)
     private String employee;
 
-    @OneToOne(mappedBy = "accountant", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     private Accountant accountant;
 }
