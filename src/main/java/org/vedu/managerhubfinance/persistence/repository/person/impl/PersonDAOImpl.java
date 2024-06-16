@@ -8,9 +8,11 @@ import org.vedu.managerhubfinance.persistence.model.groupperson.PersonPhone;
 import org.vedu.managerhubfinance.persistence.repository.CrudRepositoryImpl;
 import org.vedu.managerhubfinance.persistence.repository.person.PersonDAO;
 
+import jakarta.ejb.Stateless;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.TypedQuery;
 
+@Stateless
 public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements PersonDAO<Long, Person>{
 
 	public PersonDAOImpl() {
@@ -20,7 +22,7 @@ public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements P
 	@Override
 	public Person findByNameAndType(String name, String type) {
 		TypedQuery<Person> query = 
-				getEm()
+				getEntityManager()
 				.createQuery(
 						"SELECT p FROM Person p WHERE p.name = :name AND p.type = :type",
 						Person.class);
@@ -33,7 +35,7 @@ public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements P
 	@Override
 	public Person findByNameAndType(String name, String type, LockModeType lockModeType) {
 		TypedQuery<Person> query = 
-				getEm()
+				getEntityManager()
 				.createQuery(
 						"SELECT p FROM Person p WHERE p.name = :name AND p.type = :type",
 						Person.class);
@@ -46,7 +48,7 @@ public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements P
 	@Override
 	public List<Person> findListByType(String type) {
 		TypedQuery<Person> query = 
-				getEm()
+				getEntityManager()
 				.createQuery(
 						"SELECT p FROM Person p WHERE p.type = :type",
 						Person.class);
@@ -58,7 +60,7 @@ public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements P
 	@Override
 	public List<Person> findListByType(String type, LockModeType lockModeType) {
 		TypedQuery<Person> query = 
-				getEm()
+				getEntityManager()
 				.createQuery(
 						"SELECT p FROM Person p WHERE p.type = :type",
 						Person.class);
@@ -70,7 +72,7 @@ public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements P
 	@Override
 	public List<? extends PersonContact> findListContact(String contactName, Long idPerson) {
 		TypedQuery<? extends PersonContact> query = 
-				getEm()
+				getEntityManager()
 				.createQuery(
 				"SELECT pc FROM PersonContact pc WHERE pc.name = :name AND pc.person.id = :idPerson",
 				PersonContact.class);
@@ -84,7 +86,7 @@ public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements P
 	@Override
 	public List<?> findListPhone(String phoneType, Long idPerson) {
 		TypedQuery<? extends PersonPhone> query = 
-                getEm()
+				getEntityManager()
                 .createQuery(
                 "SELECT pp FROM PersonPhone pp WHERE pp.type = :type AND pp.person.id = :idPerson",
                 PersonPhone.class);
@@ -93,9 +95,5 @@ public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements P
         query.setLockMode(LockModeType.NONE);
         List<? extends PersonPhone> result = query.getResultList();
         return result;
-	}
-
-	public static PersonDAOImpl getInstance() {
-		return new PersonDAOImpl();
 	}
 }

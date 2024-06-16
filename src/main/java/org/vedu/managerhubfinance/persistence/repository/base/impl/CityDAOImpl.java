@@ -5,28 +5,19 @@ import org.vedu.managerhubfinance.persistence.repository.CrudRepositoryImpl;
 import org.vedu.managerhubfinance.persistence.repository.base.CityDAO;
 
 import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
-import jakarta.persistence.PersistenceContext;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Stateless
 public class CityDAOImpl extends CrudRepositoryImpl<String, City> implements CityDAO<String, City> {
 	
-	@PersistenceContext
-	private EntityManager em;
-	
-	public CityDAOImpl(EntityManager em) {
+	public CityDAOImpl() {
 		super(City.class);
-		this.em = em;
 	}
 
 	@Override
 	public City findByName(String name) {
 		String query = "SELECT c FROM City c WHERE c.name = :name";
-	    return em
+	    return getEntityManager()
 	    		.createQuery(query, City.class)
 	    		.setParameter("name", name)
 	    		.getSingleResult();
