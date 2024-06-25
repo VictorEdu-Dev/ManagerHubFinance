@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,7 +39,7 @@ public class FinNatureFin extends PropertiesEntity {
 	@Column(name = "description", nullable = true, length = 100)
 	private String description;
 	
-	@Lob
+	@Lob @Basic(fetch = FetchType.LAZY)
 	@Column(name = "observation", nullable = true, length = 100)
 	private String observation;
 	
@@ -46,7 +47,7 @@ public class FinNatureFin extends PropertiesEntity {
 	@Column(name = "type", nullable = true, length = 1)
 	private String type;
 	
-	@Lob
+	@Lob @Basic(fetch = FetchType.LAZY)
 	@Column(name = "aplicability", nullable = true, length = 100)
 	private String aplicability;
 }
