@@ -1,0 +1,228 @@
+body {
+  font-family: 'open_sansregular';
+  margin: 0;
+  padding: 0;
+  background-color: #171717;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.main_content container {
+  flex: 1;
+}
+
+.content { 
+  float:left; 
+  width:100%; 
+  margin: 0;
+  padding: 0;
+}
+
+/*Seu Código*/
+.section-seu-codigo { 
+  padding:0px;
+  background-color:#262626;
+}
+
+.section-seu-codigo .content {
+  float:left;
+  padding:0;
+}
+
+.box-artigo   {
+  width:100%;
+  height: 100vh;
+  float:left;
+  background:#262626;
+  display: flex;
+  align-items: center;
+
+}
+
+/*Login*/
+.form-card { 
+  
+  width: 300px;
+  margin: auto;
+  background-image: linear-gradient(163deg, #02f1db 0%, #0071e8 100%);
+  border-radius: 25px;
+  transition: all .3s;
+
+}
+
+.form-card-2 {
+
+  border-radius: 0;
+  transition: all .2s;
+
+}
+
+.form-card-2:hover {
+
+  transform: scale(0.99);
+  border-radius: 25px;
+
+}
+
+.form-card:hover { box-shadow: 0px 0px 30px 1px rgba(9, 207, 199, 0.3); }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 0.4em;
+  background-color: #171717;
+  border-radius: 25px;
+}
+
+.title-login {
+
+  text-align: center;
+  margin: 2em;
+  color: rgb(2, 229, 223);
+  font-size: 1.2em;
+
+}
+
+.field {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border-radius: 25px;
+  padding: 0.6em;
+  border: none;
+  outline: none;
+  color: rgb(2, 229, 223); 
+  background-color: #171717;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+
+}
+
+.input-icon {
+
+  width: 1.3em;
+  height: 1.3em;
+  color: rgb(253, 253, 253);
+  margin-left: 10px;
+
+}
+
+.input-field {
+
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: rgb(253, 253, 253);
+
+}
+
+.input-field:hover  { color:rgb(2, 229, 223); }
+
+.form .box-btn {
+  
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  margin: 25px 0;
+  padding: 0 5px;
+
+}
+
+.btn-login {
+
+  width: 50%;
+  background-image:linear-gradient(150deg, #024075 0%, #00d2d0 100%); 
+  color: #fff;
+  text-decoration:none;
+  padding: 0.4em 1em;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: .4s;
+  font-size: 0.9em;
+  float: left;
+  margin-right: 5%;
+  text-align: center;
+}
+
+.btn-login:nth-of-type(2n+0) { margin-right:0; }
+.btn-login:hover { background-image: linear-gradient(150deg, #00b8bf 0%, #002646 100%); color:rgb(255, 255, 255); }
+
+/*Login*/
+
+/*FOOTER*/
+.main_footer          { background-color:#007cff; color:#fff; font-size:0.875em; }
+.main_footer .content { padding:3em 0em; }
+
+.main_footer_copy       { background-color:transparent; width:100%; float:left; text-align:center; padding:1.5em 0em; }
+.main_footer_copy p     { font-family:'open_sanslight'; font-size:1em; color:#ffffff; height:20px; }
+.main_footer_copy .m-b-footer   { margin-bottom:0.5em; }
+.main_footer_copy .by   { font-size:0.96em; }
+.main_footer_copy .by i { font-size:0.96em; margin-right:3px; color:#e82626; }
+.main_footer_copy .by a { text-decoration:underline; color:#ffffff; }
+.main_footer_copy .by a:hover { color:#000000;}
+
+
+/*Começa o Responsivo*/
+
+/*480PX BREAKPOINT*/
+/*480 dividido por 16 = 30em*/
+@media (min-width:30em){
+
+.boxBannerTopo { padding:1em 0; }
+
+}
+
+/*600PX BREAKPOINT*/
+/*600 dividido por 16 = 37,5em*/
+@media (min-width:37em){
+
+
+} 
+
+/*768PX BREAKPOINT*/
+/*768 dividido por 16 = 48em*/
+@media (min-width:48em){
+
+
+} 
+
+/*960PX BREAKPOINT*/
+/*960 dividido por 16 = 60em*/
+@media (min-width:60em){
+
+ .section-seu-codigo          { padding:20px 0px; }
+
+.btn-download { width:35%; }
+
+}
+
+/*1280PX BREAKPOINT*/
+/*1280 dividido por 16 = 80em*/
+@media (min-width:80em){
+
+ 
+}
+
+/*1366PX BREAKPOINT*/
+/*1366 dividido por 16 = 85,375em*/
+@media (min-width:85em){
+
+ .content  { width:80%; margin:0 10%; }
+
+}
+
+/*1600PX BREAKPOINT*/
+/*1600 dividido por 16 = 100em*/
+@media (min-width:100em){
+
+
+}
+/*Fecha o Responsivo*/
