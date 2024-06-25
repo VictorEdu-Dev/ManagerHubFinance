@@ -1,4 +1,4 @@
-package org.vedu.managerhubfinance.util;
+package org.vedu.managerhubfinance.service.util;
 
 
 
