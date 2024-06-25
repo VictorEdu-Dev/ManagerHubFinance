@@ -8,7 +8,7 @@ import org.vedu.managerhubfinance.persistence.model.groupbasic.Cep;
 import jakarta.ejb.Local;
 
 @Local
-public interface BasicService {
+public interface LocationService {
 	public void initialize();
 	
 	public Optional<String> getNumberCep(Map<String, String> properties);
