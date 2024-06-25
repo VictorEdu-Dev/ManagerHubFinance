@@ -13,7 +13,7 @@ import jakarta.persistence.LockModeType;
 import jakarta.persistence.TypedQuery;
 
 @Stateless
-public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements PersonDAO<Long, Person>{
+public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements PersonDAO<Long, Person> {
 
 	public PersonDAOImpl() {
 		super(Person.class);
