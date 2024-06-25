@@ -10,10 +10,14 @@ import org.vedu.managerhubfinance.persistence.model.groupperson.Supplier;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -41,19 +45,19 @@ public class FinPaymentLaunch extends PropertiesEntity {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "source_documents_id", nullable = false, unique = true)
+	@JoinColumn(name = "source_documents_id", nullable = true, unique = false)
 	private FinSourceDocuments sourceDocuments;
 	
-	@ManyToOne
-	@JoinColumn(name = "nature_fin_id", nullable = false, unique = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "nature_fin_id", nullable = true, unique = false)
 	private FinNatureFin natureFin;
 	
 	@ManyToOne
-	@JoinColumn(name = "account_teller_id", nullable = false)
+	@JoinColumn(name = "account_teller_id", nullable = true)
 	private AccountTeller accountTeller;
 	
 	@ManyToOne
-	@JoinColumn(name = "supplier_id", nullable = false)
+	@JoinColumn(name = "supplier_id", nullable = true)
 	private Supplier supplier;
 	
 	@Basic
@@ -69,7 +73,7 @@ public class FinPaymentLaunch extends PropertiesEntity {
 	private LocalDateTime launchDate;
 	
 	@Basic
-	@Column(name = "document_number", nullable = true)
+	@Column(name = "document_number", nullable = true, length = 100)
 	private String documentNumber;
 	
 	@Basic
@@ -77,14 +81,34 @@ public class FinPaymentLaunch extends PropertiesEntity {
 	private LocalDateTime firstExpirationDate;
 	
 	@Basic
-	@Column(name = "commission_tax", nullable = true)
+	@Column(name = "image_document", nullable = true, length = 100)
 	private String imageDocument;
 	
 	@Basic
-	@Column(name = "commission_value", nullable = true)
-	private Integer installmentInterval;
+	@Column(name = "installment_interval", nullable = true, length = 2)
+	private String installmentInterval;
 	
 	@Basic
-	@Column(name = "installment_interval", nullable = true)
+	@Column(name = "fixed_day", nullable = true, length = 2)
 	private String fixedDay;
+	
+	@Lob @Basic(fetch = FetchType.LAZY)
+	@Column(name = "historical", nullable = true, length = 1000)
+	private String historical;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "fin_payment_type", nullable = true, length = 20)
+	private FinPaymentTypeEnum finPaymentType;
+	
+	@Basic
+	@Column(name = "due_date", nullable = true)
+	private LocalDateTime dueDate;
+	
+	@Basic
+	@Column(name = "limit_payment_date", nullable = true)
+	private LocalDateTime limitPaymentDate;
+	
+	@Basic
+	@Column(name = "consider_working_day", nullable = true)
+	private Boolean considerWorkingDay;
 }
