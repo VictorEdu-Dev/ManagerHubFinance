@@ -11,17 +11,16 @@ import org.vedu.managerhubfinance.persistence.model.groupbasic.State;
 import org.vedu.managerhubfinance.persistence.repository.base.CepDAO;
 import org.vedu.managerhubfinance.persistence.repository.base.CityDAO;
 import org.vedu.managerhubfinance.persistence.repository.base.StateDAO;
-import org.vedu.managerhubfinance.service.basic.BasicService;
+import org.vedu.managerhubfinance.service.basic.LocationService;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
 @Stateless
-public class BasicUserImpl implements BasicService {
-	private Logger logger = Logger.getLogger(BasicUserImpl.class.getName());
+public class LocationUserImpl implements LocationService {
+	private Logger logger = Logger.getLogger(LocationUserImpl.class.getName());
 	
 	@EJB
 	private CepDAO<String, Cep> cepDAO;
@@ -67,7 +66,7 @@ public class BasicUserImpl implements BasicService {
 		return Optional.of(addressInfo);
 	}
 	
-	@RolesAllowed("ADMIN")
+	@Override
 	public void editCepInfo(Cep cep) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
