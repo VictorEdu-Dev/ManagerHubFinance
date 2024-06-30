@@ -30,7 +30,7 @@ public class AccountsPayable {
     private PaymentLaunchService<String, FinPaymentLaunch> paymentLaunchService;
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccountPayable(@PathParam("id") @NotBlank String id) {
         logger.log(Level.INFO, "Received request to list account payable with id: {0}", id);
