@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.vedu.managerhubfinance.persistence.model.groupperson.Person;
 import org.vedu.managerhubfinance.persistence.model.groupperson.PersonContact;
-import org.vedu.managerhubfinance.persistence.model.groupperson.PersonPhone;
 import org.vedu.managerhubfinance.persistence.repository.CrudRepositoryImpl;
 import org.vedu.managerhubfinance.persistence.repository.person.PersonDAO;
 
@@ -81,19 +80,5 @@ public class PersonDAOImpl extends CrudRepositoryImpl<Long, Person> implements P
 		query.setLockMode(LockModeType.NONE);
 		List<? extends PersonContact> result = query.getResultList();
 		return result;
-	}
-
-	@Override
-	public List<?> findListPhone(String phoneType, Long idPerson) {
-		TypedQuery<? extends PersonPhone> query = 
-				getEntityManager()
-                .createQuery(
-                "SELECT pp FROM PersonPhone pp WHERE pp.type = :type AND pp.person.id = :idPerson",
-                PersonPhone.class);
-        query.setParameter("type", phoneType);
-        query.setParameter("idPerson", idPerson);
-        query.setLockMode(LockModeType.NONE);
-        List<? extends PersonPhone> result = query.getResultList();
-        return result;
 	}
 }
