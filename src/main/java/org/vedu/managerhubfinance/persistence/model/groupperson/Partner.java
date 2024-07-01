@@ -1,17 +1,26 @@
 package org.vedu.managerhubfinance.persistence.model.groupperson;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
+import org.vedu.managerhubfinance.persistence.model.financialblock.CategoryFinance;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.MapKeyEnumerated;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -25,37 +34,53 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "person")
+@ToString(exclude = {"person", "categoryFinance", "registrationDetails", "additionalData"}, callSuper = true)
 @Builder
-@Table(name = "customer")
+@Table(name = "partner")
 @Entity
-public class Customer extends PropertiesEntity {
+public class Partner extends PropertiesEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@OneToOne
-	@JoinColumn(name = "person_id", nullable = false)
+	@JoinColumn(name = "person_id")
 	private Person person;
 	
-	@Basic
-	@Column(name = "since", nullable = false)
-	private LocalDateTime since;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "person_type", nullable = false)
+	private PersonType personType;
+	
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "customer_registration_details", joinColumns = @JoinColumn(name = "customer_id"))
+	@MapKeyEnumerated(EnumType.STRING)
+	@MapKeyColumn(name = "person_type", length = 50, nullable = false)
+	@Column(name = "registration_details", nullable = false)
+	private Map<PersonType, AdditionalData> registrationDetails;
 	
 	@Basic
-	@Column(name = "registration_date", nullable = false)
-	private LocalDateTime registrationDate;
-	
-	@Basic
-	@Column(name = "limit_credit", nullable = false)
+	@Column(name = "limit_credit", precision = 10, scale = 2)
 	private BigDecimal limitCredit;
 	
 	@Basic
-	@Column(name = "discount_rate", nullable = false)
-	private BigDecimal discountRate;
+	@Column(name = "payment_condition", length = 50)
+	private String paymentCondition;
+	
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "customer_additional_data", joinColumns = @JoinColumn(name = "customer_id"))
+	@MapKeyEnumerated(EnumType.STRING)
+	@MapKeyColumn(name = "person_type", length = 50, nullable = false)
+	@Column(name = "additional_data", nullable = false)
+	private Map<PersonType, AdditionalData> additionalData;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	private CategoryFinance categoryFinance;
 	
 	@Basic
-	@Column(name = "observation", nullable = true, length = 100)
+	@Column(name = "is_billing")
+	private Boolean isBilling;
+	
+	@Basic(fetch = FetchType.LAZY) @Lob
+	@Column(name = "observation", length = 200)
 	private String observation;
-
 }
