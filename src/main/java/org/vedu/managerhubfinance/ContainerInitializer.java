@@ -1,4 +1,4 @@
-package org.vedu.managerhubfinance.controller.config;
+package org.vedu.managerhubfinance;
 
 import java.util.Set;
 
