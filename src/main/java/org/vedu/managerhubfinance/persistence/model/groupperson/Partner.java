@@ -56,7 +56,7 @@ public class Partner extends PropertiesEntity {
 	@MapKeyEnumerated(EnumType.STRING)
 	@MapKeyColumn(name = "person_type", length = 50, nullable = false)
 	@Column(name = "registration_details", nullable = false)
-	private Map<PersonType, AdditionalData> registrationDetails;
+	private Map<PersonType, RegistrationDetails> registrationDetails;
 	
 	@Basic
 	@Column(name = "limit_credit", precision = 10, scale = 2)
