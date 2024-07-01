@@ -54,7 +54,6 @@ public class CorporateEntity extends PropertiesEntity {
 	@Column(name = "municipal_registration", nullable = false, length = 20)
 	private String municipalRegistration;
 	
-	@Basic
 	@Column(name = "date_of_constitution", nullable = false)
 	private LocalDateTime dateOfConstitution;
 	
