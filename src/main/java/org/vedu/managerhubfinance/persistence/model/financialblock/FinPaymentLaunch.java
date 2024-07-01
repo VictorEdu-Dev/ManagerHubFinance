@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 import org.vedu.managerhubfinance.persistence.model.groupfinance.AccountTeller;
-import org.vedu.managerhubfinance.persistence.model.groupperson.Supplier;
+import org.vedu.managerhubfinance.persistence.model.groupperson.Partner;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
