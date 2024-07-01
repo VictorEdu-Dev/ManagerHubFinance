@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 import org.vedu.managerhubfinance.persistence.model.groupfinance.AccountTeller;
-import org.vedu.managerhubfinance.persistence.model.groupperson.Customer;
+import org.vedu.managerhubfinance.persistence.model.groupperson.Partner;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -50,7 +50,7 @@ public class FinReceiveLaunch extends PropertiesEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "customer_id", nullable = false)
-	private Customer customer;
+	private Partner customer;
 	
 	@ManyToOne
 	@JoinColumn(name = "account_teller_id", nullable = false)
