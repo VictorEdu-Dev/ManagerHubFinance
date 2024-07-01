@@ -8,7 +8,8 @@ Este projeto é um módulo financeiro de um sistema ERP, desenvolvido em Java co
 
 - Java 17
 - Maven 3.9.6
-- Jakarta Persistence API (JPA) 3.1
+- Jakarta Web Profile 11
+- Jakarta Persistence API (JPA) 3.2
 - Hibernate 7.0.0.Alpha2
 - WildFly 32
 - PostgreSQL 16.3
