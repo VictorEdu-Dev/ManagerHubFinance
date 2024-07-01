@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 import org.vedu.managerhubfinance.persistence.model.groupbasic.Cep;
-import org.vedu.managerhubfinance.persistence.model.groupbasic.City;
-import org.vedu.managerhubfinance.persistence.model.groupbasic.State;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -42,28 +40,8 @@ public class PersonAddress extends PropertiesEntity {
 	private List<Person> person;
 	
 	@Basic
-	@Column(name = "public_place", nullable = false, length = 150)
-	private String publicPlace;
-	
-	@Basic
 	@Column(name = "number", length = 10)
 	private String number;
-	
-	@Basic
-	@Column(name = "complement", length = 50)
-	private String complement;
-	
-	@Basic
-	@Column(name = "neighborhood", length = 100)
-	private String neighborhood;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "city_ibge_code")
-	private City city;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "state_ibge_code")
-	private State state;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "number_cep_cep", nullable = false)
