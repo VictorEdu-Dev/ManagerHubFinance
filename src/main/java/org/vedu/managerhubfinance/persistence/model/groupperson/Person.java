@@ -18,7 +18,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,12 +33,7 @@ import lombok.ToString;
 @Data
 @ToString(exclude = {
 		"personContact",
-		"personPhone", 
-		"personAddress", 
-		"customer", 
-		"supplier", 
-		"carrier", 
-		"accountant"})
+		"personAddress"})
 @Builder
 @EntityListeners({PersonListener.class})
 @Table(name = "person")
@@ -52,38 +46,23 @@ public class Person extends PropertiesEntity {
     @Basic
     @Column(name = "name", nullable = false, length = 150)
     private String name;
+    
+    @Basic
+    @Column(name = "nickname", length = 100)
+    private String nickname;
+    
+    @Basic
+    @Column(name = "code", length = 100)
+    private String code;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false, length = 10)
+    @Column(name = "type", nullable = false, length = 15)
     private PersonType type;
 
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
     private List<PersonContact> personContact;
     
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
-    private List<PersonPhone> personPhone;
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_address_id", nullable = false)
     private PersonAddress personAddress;
-
-    @Basic
-    @Column(name = "site", nullable = false, length = 100)
-    private String site;
-
-    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
-    private Customer customer;
-
-    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
-    private Supplier supplier;
-
-    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
-    private Carrier carrier;
-
-    @Basic
-    @Column(name = "employee", nullable = false, length = 1)
-    private String employee;
-
-    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
-    private Accountant accountant;
 }
