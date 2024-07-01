@@ -13,8 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +37,6 @@ public class Carrier extends PropertiesEntity {
 	@JoinColumn(name = "person_id", nullable = false)
 	private Person person;
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name = "register_date", nullable = false)
 	private LocalDateTime registerDate;
 	
