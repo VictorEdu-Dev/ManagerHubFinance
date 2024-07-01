@@ -35,7 +35,7 @@ public class JobTitle extends PropertiesEntity {
 	private String name;
 	
 	@Lob
-	@Column(nullable = false, length = 100)
+	@Column(nullable = true, length = 100)
 	private String description;
 	
 	@Basic
@@ -43,10 +43,10 @@ public class JobTitle extends PropertiesEntity {
 	private BigDecimal salary;
 	
 	@Basic
-	@Column(nullable = false, length = 10)
+	@Column(nullable = true, length = 10)
 	private String cbo1994;
 	
 	@Basic
-	@Column(nullable = false, length = 10)
+	@Column(nullable = true, length = 10)
 	private String cbo2002;
 }
