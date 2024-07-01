@@ -58,7 +58,7 @@ public class FinPaymentLaunch extends PropertiesEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "supplier_id", nullable = true)
-	private Supplier supplier;
+	private Partner supplier;
 	
 	@Basic
 	@Column(name = "installment_quantity", nullable = true)
