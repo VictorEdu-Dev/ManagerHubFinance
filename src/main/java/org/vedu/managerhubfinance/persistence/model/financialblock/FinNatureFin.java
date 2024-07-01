@@ -35,10 +35,6 @@ public class FinNatureFin extends PropertiesEntity {
 	@Column(name = "nature_fin", nullable = false, length = 4)
 	private FinNatureFinEnum natureFin;
 	
-	@Lob
-	@Column(name = "description", nullable = true, length = 100)
-	private String description;
-	
 	@Lob @Basic(fetch = FetchType.LAZY)
 	@Column(name = "observation", nullable = true, length = 100)
 	private String observation;
