@@ -1,5 +1,7 @@
 package org.vedu.managerhubfinance.persistence.model.groupperson;
 
+import java.time.LocalDateTime;
+
 import org.vedu.managerhubfinance.persistence.model.PropertiesEntity;
 
 import jakarta.persistence.Basic;
@@ -36,16 +38,43 @@ public class PersonContact extends PropertiesEntity {
 	@JoinColumn(name = "person_id", nullable = false)
 	private Person person;
 	
-	@Basic
-	@Column(name = "name", nullable = false, length = 150)
-	private String name;
+	@Basic @Lob
+	@Column(name = "contact_information", length = 200)
+	private String contactInformation;
 	
 	@Basic
 	@Column(name = "email", length = 150)
 	private String email;
 	
-	@Lob
-	@Column(name = "obsevation", length = 100)
-	private String observation;
-
+	@Basic
+	@Column(name = "email_nfe", length = 20)
+	private String emailNfe;
+	
+	@Basic
+	@Column(name = "phone", length = 20)
+	private String phone;
+	
+	@Basic
+	@Column(name = "cell_phone", length = 20)
+	private String cellPhone;
+	
+	@Basic
+	@Column(name = "operator", length = 20)
+	private String operator;
+	
+	@Basic
+	@Column(name = "fax", length = 100)
+	private String fax;
+	
+	@Basic
+	@Column(name = "website", length = 100)
+	private String website;
+	
+	@Basic
+	@Column(name = "skype", length = 100)
+	private String skype;
+	
+	@Basic
+	@Column(name = "next_visit")
+	private LocalDateTime nextVisit;
 }
